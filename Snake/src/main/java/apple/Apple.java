@@ -1,7 +1,9 @@
 package apple;
 
+import model.DelayParameters;
 import positioning.SnakeBody;
 
+import javax.swing.*;
 import java.util.Random;
 
 import static positioning.Parameters.*;
@@ -30,6 +32,27 @@ public class Apple {
         }
     }
 
+    public void checkApple(SnakeBody snakeBody, Timer timer, DelayParameters delay){
+        if((snakeBody.getBody().get(0).getX() == this.appleX)
+                && (snakeBody.getBody().get(0).getY() == this.appleY)){
+            snakeBody.addBodyParts();
+            this.addAppleEaten();
+            this.newApple(snakeBody);
+            delay.increaseAccelerator();
+        }
+
+        delay.checkAccelerator();
+        timer.setDelay(delay.getDelay());
+    }
+
+    public void refreshApple(){
+        appleEaten = 0;
+    }
+
+    public void addAppleEaten() {
+        this.appleEaten++;
+    }
+
     public int getAppleX() {
         return appleX;
     }
@@ -42,7 +65,5 @@ public class Apple {
         return appleEaten;
     }
 
-    public void addAppleEaten() {
-        this.appleEaten++;
-    }
+
 }

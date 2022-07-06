@@ -1,6 +1,8 @@
 import apple.Apple;
 import model.CheckCollisions;
+import model.DelayParameters;
 import positioning.Direction;
+import positioning.Movement;
 import positioning.SnakeBody;
 
 import javax.swing.*;
@@ -11,18 +13,15 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import static positioning.Parameters.*;
-import static positioning.Parameters.SCREEN_HEIGHT;
 
 public class GamePanelChanged  extends JPanel implements ActionListener {
 
     SnakeBody snakeBody;
     Apple apple = new Apple();
-    CheckCollisions checkCollisions = new CheckCollisions();
+    DelayParameters delay;
 
-    int delay;
-    int timerAccelerator = 0;
 
-    Direction direction = Direction.RIGHT;
+    Direction direction;
     boolean running = false;
 
     Timer timer;
@@ -36,11 +35,14 @@ public class GamePanelChanged  extends JPanel implements ActionListener {
     }
 
     public void startGame(){
-        delay = DELAY;
+        repaint();
+        delay = new DelayParameters();
+        direction = Direction.RIGHT;
         snakeBody = new SnakeBody();
+        apple.refreshApple();
         apple.newApple(snakeBody);
         running = true;
-        timer = new Timer(delay, this);
+        timer = new Timer(delay.getDelay(), this);
         timer.start();
     }
 
@@ -51,12 +53,14 @@ public class GamePanelChanged  extends JPanel implements ActionListener {
 
     public void draw(Graphics g){
         if(running){
-            for(int i = 1; i < SCREEN_HEIGHT/UNIT_SIZE; i++){
-                g.drawLine(0, i*UNIT_SIZE, SCREEN_WIDTH, i*UNIT_SIZE);
+            for(int i = 1; i <= SCREEN_HEIGHT/UNIT_SIZE; i++){
+                g.drawLine(0, i*UNIT_SIZE,
+                        SCREEN_WIDTH- SCREEN_WIDTH % UNIT_SIZE, i*UNIT_SIZE);
             }
 
-            for(int i = 1; i < SCREEN_WIDTH/UNIT_SIZE; i++){
-                g.drawLine(i*UNIT_SIZE, 0, i*UNIT_SIZE, SCREEN_HEIGHT);
+            for(int i = 1; i <= SCREEN_WIDTH/UNIT_SIZE; i++){
+                g.drawLine(i*UNIT_SIZE, 0,
+                        i*UNIT_SIZE, SCREEN_HEIGHT - SCREEN_HEIGHT % UNIT_SIZE);
             }
 
             g.setColor(Color.RED);
@@ -87,64 +91,33 @@ public class GamePanelChanged  extends JPanel implements ActionListener {
     }
 
 
-    public void move(){
-        for(int i = snakeBody.getBodyParts()-1; i>0; i--){
-            snakeBody.getBody().get(i).setX(snakeBody.getBody().get(i-1).getX());
-            snakeBody.getBody().get(i).setY(snakeBody.getBody().get(i-1).getY());
-        }
-
-        switch (direction){
-            case UP: snakeBody.getBody().get(0)
-                    .setY(snakeBody.getBody().get(0).getY() - UNIT_SIZE);
-            break;
-            case DOWN: snakeBody.getBody().get(0)
-                    .setY(snakeBody.getBody().get(0).getY() + UNIT_SIZE);
-            break;
-            case LEFT: snakeBody.getBody().get(0)
-                    .setX(snakeBody.getBody().get(0).getX() - UNIT_SIZE);
-            break;
-            case RIGHT: snakeBody.getBody().get(0)
-                    .setX(snakeBody.getBody().get(0).getX() + UNIT_SIZE);
-            break;
-        }
-    }
-
-    public void checkApple(){
-        if((snakeBody.getBody().get(0).getX() == apple.getAppleX())
-                && (snakeBody.getBody().get(0).getY() == apple.getAppleY())){
-            snakeBody.addBodyParts();
-            apple.addAppleEaten();
-            apple.newApple(snakeBody);
-            timerAccelerator++;
-        }
-
-        if(timerAccelerator%5 == 0 && timerAccelerator != 0){
-            timerAccelerator = 0;
-            delay = delay*9/10;
-            timer.setDelay(delay);
-        }
-    }
-
-
     public void gameOver(Graphics g){
         g.setColor(Color.RED);
         g.setFont(new Font("Ink Free", Font.BOLD, 75));
         FontMetrics metrics = getFontMetrics(g.getFont());
-        g.drawString("Game Over", (SCREEN_WIDTH - metrics.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2);
+        g.drawString("Game Over",
+                (SCREEN_WIDTH - metrics.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2);
 
         g.setFont(new Font("Ink Free", Font.BOLD, 40));
         metrics = getFontMetrics(g.getFont());
         g.drawString("Your score: " + apple.getAppleEaten(),
                 (SCREEN_WIDTH - metrics.stringWidth("Your score: " + apple.getAppleEaten()))/2,
                 g.getFont().getSize());
+
+        g.setFont(new Font("Ink Free", Font.BOLD, 20));
+        metrics = getFontMetrics(g.getFont());
+        g.drawString("Press 'Enter' to restart or 'ESC' to exit",
+                (SCREEN_WIDTH - metrics.stringWidth("Press 'Enter' to restart or 'ESC' to exit"))/2,
+                SCREEN_HEIGHT - 30);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(running) {
-            move();
-            checkApple();
-            running = checkCollisions.checkCollisions(snakeBody, timer, running);
+            Movement.move(snakeBody, direction);
+            apple.checkApple(snakeBody, timer, delay);
+            running = CheckCollisions.checkCollisions(snakeBody, timer, running);
         }
         repaint();
     }
@@ -179,6 +152,9 @@ public class GamePanelChanged  extends JPanel implements ActionListener {
             } else {
                 switch (event.getKeyCode()){
                     case KeyEvent.VK_ENTER:
+                        GamePanelChanged.super.removeAll();
+                        GamePanelChanged.super.repaint();
+                        GamePanelChanged.super.revalidate();
                         startGame();
                         break;
                     case KeyEvent.VK_ESCAPE:
@@ -186,7 +162,6 @@ public class GamePanelChanged  extends JPanel implements ActionListener {
                         break;
                 }
             }
-
         }
     }
 }

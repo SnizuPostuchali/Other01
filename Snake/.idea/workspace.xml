@@ -4,7 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="106e018f-9a61-4a9c-9a13-9ca7bf41ba00" name="Changes" comment="" />
+    <list default="true" id="106e018f-9a61-4a9c-9a13-9ca7bf41ba00" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../JavaEEstart/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaEEstart/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaEEstart/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaEEstart/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaEEstart/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaEEstart/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaEEstart/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaEEstart/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaEEstart/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GamePanelChanged.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GamePanelChanged.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/apple/Apple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apple/Apple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/CheckCollisions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/CheckCollisions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/positioning/Parameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/positioning/Parameters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/GamePanelChanged$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/GamePanelChanged$MyKeyAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GamePanelChanged$MyKeyAdapter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/GamePanelChanged.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GamePanelChanged.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/apple/Apple.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/apple/Apple.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/CheckCollisions.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/CheckCollisions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/positioning/Parameters.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/positioning/Parameters.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,7 +46,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2BT0rUyVtA2uApP4xqzkomGHxUb" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
