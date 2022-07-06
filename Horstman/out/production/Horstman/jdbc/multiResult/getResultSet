@@ -1,0 +1,17 @@
+boolean isResult = stat.execute(command);
+boolean done = false;
+while(!done)
+{
+    if(isResult){
+        ResultSet result = stat.getResultSet();
+        сделать что-то с результатом
+    } else {
+        int updateCount = stat.getUpdateCount();
+        if(updateCount >= 0){
+            сделать что-то с подсчётом обновлений updateCount
+        } else {
+            done = true;
+        }
+    }
+    if(!done) isResult = stat.getMoteResults();
+}

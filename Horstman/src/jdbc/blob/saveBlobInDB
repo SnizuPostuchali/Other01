@@ -1,0 +1,8 @@
+Blob coverBlob = connection.createBlob();
+int offset = 0;
+OutputStream out = coverBlob.setBinaryStream(offset);
+ImageIO.write(coverImage, "PNG", out);
+PreparedStatement stat = conn.prepareStatement("INSERT INTO Cover Values(?, ?)");
+stat.set(1, isbn);
+stat.set(2, coverBlob);
+stat.executeUpdate();
