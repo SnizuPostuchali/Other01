@@ -1,2 +1,6 @@
-org\test\hw\Hello.class
 org\test\hw\FirstServlet.class
+org\test\hw\GetCookiesServlet.class
+org\test\hw\logic\TestClass.class
+org\test\hw\SetCookiesServlet.class
+org\test\hw\Cart.class
+org\test\hw\DeleteCookiesServlet.class
